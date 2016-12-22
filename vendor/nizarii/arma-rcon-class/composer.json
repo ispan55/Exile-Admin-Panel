@@ -1,0 +1,32 @@
+{
+  "name": "nizarii/arma-rcon-class",
+  "homepage": "https://github.com/Nizarii/arma-rcon-class-php/",
+  "type": "library",
+  "description": "ARC allows you connecting and sending commands easily to your BattlEye server",
+  "require": {
+    "php": ">=5.4.0"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Felix Schäfer",
+      "email": "nizari@starwolf-dev.com",
+      "role": "Developer"
+    }
+  ],
+  "keywords": [
+    "rcon",
+    "battleye",
+    "client",
+    "arma3",
+    "arma2",
+    "dayz",
+    "lightweight",
+    "class"
+  ],
+  "autoload": {
+    "files": [
+      "arc.php"
+    ]
+  }
+}

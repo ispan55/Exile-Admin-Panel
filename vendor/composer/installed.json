@@ -1,0 +1,300 @@
+[
+    {
+        "name": "voku/portable-utf8",
+        "version": "1.6.18",
+        "version_normalized": "1.6.18.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/voku/portable-utf8.git",
+            "reference": "b49c259b0f5c563422d466d10802c5db35328000"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/voku/portable-utf8/zipball/b49c259b0f5c563422d466d10802c5db35328000",
+            "reference": "b49c259b0f5c563422d466d10802c5db35328000",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*"
+        },
+        "suggest": {
+            "ext-iconv": "Use iconv for best performance",
+            "ext-intl": "Use Intl for best performance",
+            "ext-mbstring": "Use Mbstring for best performance"
+        },
+        "time": "2015-12-06T21:26:23+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.6.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "voku\\": "src/voku/"
+            },
+            "classmap": [
+                "src/Normalizer.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "(Apache-2.0 or GPL-2.0)"
+        ],
+        "authors": [
+            {
+                "name": "Hamid Sarfraz",
+                "homepage": "http://pageconfig.com/"
+            },
+            {
+                "name": "Lars Moelleken",
+                "homepage": "http://www.moelleken.org/"
+            },
+            {
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
+            }
+        ],
+        "description": "Portable UTF-8 library with polyfill / shim for Iconv, Intl, Mbstring, Normalizrer etc.",
+        "homepage": "https://github.com/voku/portable-utf8",
+        "keywords": [
+            "UTF",
+            "clean",
+            "php",
+            "unicode",
+            "utf-8",
+            "utf8"
+        ]
+    },
+    {
+        "name": "voku/simple-cache",
+        "version": "2.1.1",
+        "version_normalized": "2.1.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/voku/simple-cache.git",
+            "reference": "b3fbb6c926b83c33f4f29942b58ecf562f6a9e11"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/voku/simple-cache/zipball/b3fbb6c926b83c33f4f29942b58ecf562f6a9e11",
+            "reference": "b3fbb6c926b83c33f4f29942b58ecf562f6a9e11",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.0"
+        },
+        "time": "2016-09-29T09:10:01+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "voku\\cache\\": "src/voku/cache/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Lars Moelleken",
+                "homepage": "http://www.moelleken.org/",
+                "role": "Developer"
+            }
+        ],
+        "description": "Simple Cache library",
+        "homepage": "https://github.com/voku/simple-cache",
+        "keywords": [
+            "cache",
+            "caching",
+            "php",
+            "simple cache"
+        ]
+    },
+    {
+        "name": "voku/simple-mysqli",
+        "version": "1.8.11",
+        "version_normalized": "1.8.11.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/voku/simple-mysqli.git",
+            "reference": "72be86719edf95258ee7c50cebe04e5a37759e82"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/voku/simple-mysqli/zipball/72be86719edf95258ee7c50cebe04e5a37759e82",
+            "reference": "72be86719edf95258ee7c50cebe04e5a37759e82",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0",
+            "voku/portable-utf8": "1.*",
+            "voku/simple-cache": "2.*"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*",
+            "satooshi/php-coveralls": "0.7.*@dev"
+        },
+        "time": "2015-09-24T12:53:35+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.8.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "voku\\db\\": "src/voku/db/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jonathan Tavares",
+                "email": "the.entomb@gmail.com",
+                "homepage": "https://github.com/entomb",
+                "role": "Developer"
+            },
+            {
+                "name": "Lars Moelleken",
+                "email": "lars@moelleken.org",
+                "homepage": "https://github.com/voku",
+                "role": "Developer"
+            }
+        ],
+        "description": "Simple MySQLi library",
+        "homepage": "https://github.com/voku/simple-mysqli",
+        "keywords": [
+            "db",
+            "mysqli",
+            "php",
+            "simple db"
+        ]
+    },
+    {
+        "name": "nizarii/arma-rcon-class",
+        "version": "2.1.3",
+        "version_normalized": "2.1.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Nizarii/arma-rcon-class-php.git",
+            "reference": "46b7e59c3d812d55793c014ccb7e191c439c0524"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Nizarii/arma-rcon-class-php/zipball/46b7e59c3d812d55793c014ccb7e191c439c0524",
+            "reference": "46b7e59c3d812d55793c014ccb7e191c439c0524",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4.0"
+        },
+        "time": "2016-08-02T07:46:53+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "arc.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Felix Schäfer",
+                "email": "nizari@starwolf-dev.com",
+                "role": "Developer"
+            }
+        ],
+        "description": "ARC allows you connecting and sending commands easily to your BattlEye server",
+        "homepage": "https://github.com/Nizarii/arma-rcon-class-php/",
+        "keywords": [
+            "arma2",
+            "arma3",
+            "battleye",
+            "class",
+            "client",
+            "dayz",
+            "lightweight",
+            "rcon"
+        ]
+    },
+    {
+        "name": "mmamedov/page-cache",
+        "version": "v1.3",
+        "version_normalized": "1.3.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/mmamedov/page-cache.git",
+            "reference": "bb518e61dbf232a0625aa91ac142c44281da848a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/mmamedov/page-cache/zipball/bb518e61dbf232a0625aa91ac142c44281da848a",
+            "reference": "bb518e61dbf232a0625aa91ac142c44281da848a",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.5.0"
+        },
+        "require-dev": {
+            "brianium/paratest": "dev-master",
+            "mikey179/vfsstream": "^1.6",
+            "mobiledetect/mobiledetectlib": "^2.8",
+            "monolog/monolog": "^1.19"
+        },
+        "suggest": {
+            "mobiledetect/mobiledetectlib": "Allows separate cache versions for mobile pages"
+        },
+        "time": "2016-05-23T07:00:30+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "PageCache\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Muhammed Mamedov",
+                "email": "mm@turkmenweb.net",
+                "homepage": "http://www.turkmenweb.com/en/",
+                "role": "Developer"
+            }
+        ],
+        "description": "PageCache is a lightweight PHP library for full page cache. It uses various strategies to differentiate among separate versions of the same page.",
+        "homepage": "https://github.com/mmamedov/page-cache",
+        "keywords": [
+            "cache",
+            "caching",
+            "file based cache",
+            "full page cache",
+            "page cache",
+            "php cache",
+            "php page cache"
+        ]
+    }
+]
