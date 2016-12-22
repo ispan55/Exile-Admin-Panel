@@ -9,3 +9,14 @@
 ad.js
 TODO
 test.html
+starter.html
+index2.html
+index.html
+.jshintrc
+bower.json
+changelog.md
+yarn.lock
+package.json
+/pages
+/uploads
+/cache
