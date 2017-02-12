@@ -1,3 +1,8 @@
+<?php
+$title = 'Vehicles';
+require_once(ROOT_PATH . 'include/header.php')
+?>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -25,7 +30,7 @@
                         <h3 class="box-title">
                             <?php
                             $sum = number_format(implode(array_column($db_exile->sumVehicles(), 'sum')));
-                            if ($sum < 2) {
+                            if ($sum == 1) {
                                 echo $sum;
                                 echo ' Vehicle';
                             } else {
@@ -65,7 +70,12 @@
                                 foreach ($db_exile->getVehicles() as $item) { ?>
                                     <tr>
                                         <td><?php echo $item['class'] ?></td>
-                                        <td><?php echo implode(array_column($db_exile->uidToName($item['account_uid']), 'name')) ?></td>
+                                        <td>
+                                            <form action="player" method="post"><a href="javascript:"
+                                                                                   onclick="parentNode.submit();"><?php echo implode(array_column($db_exile->uidToName($item['account_uid']), 'name')) ?></a><input
+                                                        type="hidden" name="uid" value="<?php echo $item['account_uid'] ?>"/>
+                                            </form>
+                                        </td>
                                         <td><?php echo $item['pin_code'] ?></td>
                                         <td><?php if ($item['is_locked'] == 1) {
                                                 echo '<span class="label label-danger">Locked';
@@ -87,3 +97,4 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+<?php require_once(ROOT_PATH . 'include/footer.php') ?>

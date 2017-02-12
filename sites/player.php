@@ -1,6 +1,40 @@
+<?php
+$title = 'Player';
+require_once(ROOT_PATH . 'include/header.php');
+require_once(ROOT_PATH . 'include/class/player.php');
+?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
+
+    <div class="modal fade" id="modalPlayer" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <p id="modalText"></p>
+                    <form>
+                        <div class="form-group">
+                            <label for="inputReason" class="control-label">Reason: </label>
+                            <input type="text" class="form-control" id="inputReason">
+                        </div>
+                        <div class="form-group" id="formTime">
+                            <label for="inputTime" class="control-label">Time to Ban: </label>
+                            <input type="text" class="form-control" id="inputTime">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="Player()">YES</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="row">
@@ -16,20 +50,19 @@
                             <br>
                             <span><span class="h5 text-bold">SteamID: </span><?php echo $user['uid'] ?></span>
                             <br>
-                            <span><span class="h5 text-bold">GUID: </span>Under Construction</span>
+                            <span><span class="h5 text-bold">GUID: </span><?php echo uidtoguid($user['uid']) ?></span>
                         </div>
                         <div class="col-md-6" style="margin-top: 10px">
-                            <button class="col-md-6 btn btn-warning" style="position: absolute; width: 45%">
+                            <button class="col-md-6 btn btn-warning" style="position: absolute; width: 45%; left: 10px;" data-toggle="modal" data-target="#modalPlayer" data-name="<?php echo $user['name']?>" data-uid="<?php echo $user['uid']?>" data-typ="Kick">
                                 Kick Player
                             </button>
-                            <button class="col-md-6 btn btn-facebook" style="position:absolute; left: 50%; width: 45%">
+                            <button class="col-md-6 btn btn-facebook" style="position:absolute; left: 50%; width: 45%" data-toggle="modal" data-target="#modalPlayer" data-name="<?php echo $user['name']?>" data-uid="<?php echo $user['uid']?>" data-typ="Temp Ban" >
                                 Temp Ban Player
                             </button>
                             <div class="row">
-                            <button class="col-md-6 btn btn-danger" style="position:absolute; margin-top: 50px; right: 53%; width: 45%">
+                            <button class="col-md-6 btn btn-danger" style="position:absolute; margin-top: 50px; right: 53%; width: 45%" data-toggle="modal" data-target="#modalPlayer" data-name="<?php echo $user['name']?>" data-uid="<?php echo $user['uid']?>" data-typ="Ban">
                                 Ban Player
                             </button>
-
                             </div>
                         </div>
                     </div>
@@ -57,7 +90,7 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <form class="form-horizontal" action="index.php?site=player" method="post">
+                        <form class="form-horizontal" action="player" method="post">
                             <div class="form-group">
                                 <label for="inputUsername" class="col-sm-2 control-label">Username</label>
                                 <div class="col-sm-10">
@@ -76,7 +109,7 @@
                                 <label for="inputGUID" class="col-sm-2 control-label">GUID</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" readonly id="inputGUID"
-                                           value="Under Construction" placeholder="GUID">
+                                           value="<?php echo uidtoguid($user['uid']) ?>" placeholder="GUID">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -139,7 +172,7 @@
                         </div>
                     </div>
                     <div class="box-body">
-                        <form class="form-horizontal" action="index.php?site=player" method="post">
+                        <form class="form-horizontal" action="player" method="post">
                             <div class="form-group">
                                 <label for="inputName" class="col-sm-2 control-label">Name</label>
                                 <div class="col-sm-10">
@@ -295,9 +328,13 @@
                             ?>
                             </tbody>
                         </table>
+                        <pre><?php
+                            //$arr = $ban->banPlayer(uidtoguid($user['uid']));echo $arr[3]; echo $arr[0];//$arr = array_shift($arr);print_r($arr);?>
+                            </pre>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </div>
+<?php require_once(ROOT_PATH . 'include/footer.php') ?>

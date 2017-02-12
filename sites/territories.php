@@ -1,3 +1,8 @@
+<?php
+$title = 'Territories';
+require_once(ROOT_PATH . 'include/header.php')
+?>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -25,7 +30,7 @@
                         <h3 class="box-title">
                             <?php
                             $sum = number_format(implode(array_column($db_exile->sumTerritories(), 'sum')));
-                            if ($sum < 2) {
+                            if ($sum == 1) {
                                 echo $sum;
                                 echo ' Territory';
                             } else {
@@ -66,7 +71,12 @@
                                 foreach ($db_exile->getTerritories() as $item) { ?>
                                     <tr>
                                         <td><?php echo $item['name'] ?></td>
-                                        <td><?php echo implode(array_column($db_exile->uidToName($item['owner_uid']), 'name')) ?></td>
+                                        <td>
+                                            <form action="player" method="post"><a href="#"
+                                                                                   onclick="parentNode.submit();"><?php echo implode(array_column($db_exile->uidToName($item['owner_uid']), 'name')) ?></a><input
+                                                        type="hidden" name="uid" value="<?php echo $item['owner_uid'] ?>"/>
+                                            </form>
+                                        </td>
                                         <td><?php echo $item['radius'] ?></td>
                                         <td><?php echo $item['level'] ?></td>
                                         <td><?php echo $item['last_paid_at'] ?></td>
@@ -85,3 +95,4 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+<?php require_once(ROOT_PATH . 'include/footer.php') ?>

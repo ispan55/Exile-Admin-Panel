@@ -1,3 +1,8 @@
+<?php
+$title = 'Search';
+require_once(ROOT_PATH . 'include/header.php');
+?>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -5,7 +10,7 @@
         <h3>Search Result</h3>
         <ol class="breadcrumb">
             <li>
-                <a href="dashboard.php">
+                <a href=".">
                     <i class="fa fa-dashboard"></i>
                     Home
                 </a>
@@ -51,7 +56,9 @@
                             </thead>
                             <tbody>
                             <?php
-                            $search = $_POST['query'];
+                            if (isset($_GET['q'])) {
+                                $search = $_GET['q'];
+                            }
                             $search = preg_replace('/\s+/', '', $search);
                             if ($db_exile->getAccount($search) == null) { ?>
                                 <tr>
@@ -64,11 +71,12 @@
                                     <tr>
                                         <td><?php echo $item['name'] ?></td>
                                         <td><?php echo $item['uid'] ?></td>
-                                        <td><?php echo implode($db_exile->getMoney($item['uid'])); ?></td>
-                                        <td><?php echo $item['score'] ?></td>
+                                        <td><?php $money = $db_exile->getMoney($item['uid']);
+                                        echo number_format($money['money'])?></td>
+                                        <td><?php echo number_format($item['score']) ?></td>
                                         <td><?php echo $item['last_connect_at'] ?></td>
                                         <td><?php echo $item['first_connect_at'] ?></td>
-                                        <td style="width: 200px"><form method="post" action="index.php?site=player">
+                                        <td style="width: 200px"><form method="post" action="player">
                                                 <button type="submit" class="btn btn-warning" name="uid" style="width: 180px"
                                                         value="<?php echo $item['uid'] ?>">Edit User
                                                 </button>
@@ -89,3 +97,4 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+<?php require_once(ROOT_PATH . 'include/footer.php') ?>
