@@ -2,7 +2,7 @@
 /**
  * Checks that the user is logged in.
  *
- * @return Returns the row of the logged in user
+ * Returns the row of the logged in user
  */
 
     function check_user($db_panel)
@@ -73,4 +73,16 @@
     {
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
         return $protocol . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . '/';
+    }
+
+    /**
+    * Return the Battleye GUID
+    */
+    function uidtoguid($uid) {
+        $temp = '';
+
+        for ($i = 0; $i < 8; $i++) {
+            $temp .= chr($uid & 0xFF);
+        }
+        return md5('BE' . $temp);
     }

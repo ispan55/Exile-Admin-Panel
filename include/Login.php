@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
                 setcookie("securitytoken",$securitytoken,time()+(3600*24*365)); //Valid for 1 year
             }
 
-            header("location: " . ROOT_PATH . "index.php"); // Redirecting To Other Page
+            header("location: ."); // Redirecting To Other Page
         } else {
             $_SESSION['error'] = 'Email oder Passwort falsch';
         }

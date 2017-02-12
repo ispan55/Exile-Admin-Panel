@@ -1,5 +1,6 @@
 <?php
 $user = $db_panel->getLoginByID($_SESSION['user_id']);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,35 +11,34 @@ $user = $db_panel->getLoginByID($_SESSION['user_id']);
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
 
-    <link rel="stylesheet" href="../plugins/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
 
-    <link rel="stylesheet" href="../dist/css/skins/skin-blue.min.css">
+    <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
 
-    <link rel="stylesheet" href="../dist/css/dashboard.css">
-
+    <link rel="stylesheet" href="dist/css/dashboard.css">
 
     <!-- REQUIRED JS SCRIPTS -->
     <!-- jQuery 2.2.3 -->
-    <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
     <!-- Bootstrap 3.3.6 -->
-    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
     <!-- AdminLTE App -->
-    <script src="../dist/js/app.min.js"></script>
-    <script src="../dist/js/custom.js"></script>
+    <script src="dist/js/app.min.js"></script>
+    <script src="dist/js/custom.js"></script>
 
-    <script src="../plugins/fastclick/fastclick.min.js"></script>
-    <script src="../plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    <script src="plugins/fastclick/fastclick.min.js"></script>
+    <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
 
-    <script src="../plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="../plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -49,13 +49,13 @@ $user = $db_panel->getLoginByID($_SESSION['user_id']);
 
 
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+<body class="hold-transition skin-blue">
+<div class="wrapper" id="wrap">
     <!-- Main Header -->
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="index.php" class="logo">
+        <a href="." class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>E</b>AD</span>
             <!-- logo for regular state and mobile devices -->
@@ -77,14 +77,14 @@ $user = $db_panel->getLoginByID($_SESSION['user_id']);
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="<?php echo $user['path'] ?>" class="user-image" alt="User Image">
+                            <img src="<?php echo $user['picture'] ?>" class="user-image img-responsive" alt="User Image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span class="hidden-xs"><?php echo $user['username'] ?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="<?php echo $user['path'] ?>" class="img-circle" alt="User Image">
+                                <img src="<?php echo $user['picture'] ?>" class="img-circle" alt="User Image">
 
                                 <p>
                                     <?php echo $user['username'] ?>
@@ -94,7 +94,7 @@ $user = $db_panel->getLoginByID($_SESSION['user_id']);
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="index.php?site=profile" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="profile" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="include/logout.php" class="btn btn-default btn-flat">Sign out</a>
@@ -115,7 +115,7 @@ $user = $db_panel->getLoginByID($_SESSION['user_id']);
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="<?php echo $user['path'] ?>" class="img-circle" alt="User Image">
+                    <img src="<?php echo $user['picture'] ?>" class="img-circle img-responsive" alt="User Image">
                 </div>
                 <div class="pull-left info">
                     <p><?php echo $user['username'] ?></p>
@@ -125,9 +125,9 @@ $user = $db_panel->getLoginByID($_SESSION['user_id']);
             </div>
 
             <!-- search form (Optional) -->
-            <form action="?site=search" method="post" class="sidebar-form">
+            <form action="search" method="get" class="sidebar-form">
                 <div class="input-group">
-                    <input type="text" name="query" class="form-control" placeholder="Name / SteamID">
+                    <input type="text" name="q" class="form-control" placeholder="Name / SteamID">
                     <span class="input-group-btn">
                 <button type="submit" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
@@ -139,16 +139,21 @@ $user = $db_panel->getLoginByID($_SESSION['user_id']);
 
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu">
+                <li class="text-center text-red"><?php if (isset($_SESSION['error'])) {
+                        echo $_SESSION['error'];
+                        unset($_SESSION['error']);
+                    } ?></li>
                 <li class="header text-center">Main Navigation</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li><a href="index.php" ><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-                <li><a href="index.php?site=territories" onclick="return loadSite('content')"><i class="fa fa-flag"></i> <span>Territories</span><span
+                <li><a href="." ><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+                <li><a href="territories" onclick="return loadSite('content')"><i class="fa fa-flag"></i> <span>Territories</span><span
                                 class="pull-right-container"><small
                                     class="label pull-right bg-blue"><?php echo number_format(implode(array_column($db_exile->sumTerritories(), 'sum'))); ?></small></span></a></li>
-                <li><a href="index.php?site=vehicles"><i class="fa fa-car"></i> <span>Vehicles</span><span
+                <li><a href="vehicles"><i class="fa fa-car"></i> <span>Vehicles</span><span
                                 class="pull-right-container"><small
                                     class="label pull-right bg-blue"><?php echo number_format(implode(array_column($db_exile->sumVehicles(), 'sum'))); ?></small></span></a></li>
-                <li><a href="index.php?site=logs"><i class="fa fa-bar-chart"></i> <span>Logs</span></a></li>
+                <li><a href="banlist"><i class="fa fa-ban"></i> <span>Banlist</span></a></li>
+                <li><a href="logs"><i class="fa fa-bar-chart"></i> <span>Logs</span></a></li>
             </ul>
             <!-- /.sidebar-menu -->
         </section>

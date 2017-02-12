@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 if(isset($_POST['submit'])) {
     $error = false;
     $username = $_POST['username'];
@@ -20,11 +20,8 @@ if(isset($_POST['submit'])) {
         $error = true;
     }
 
-    include $_SERVER['DOCUMENT_ROOT'] . "/Database/DatabasePanel.php";
-    $db = new DatabasePanel();
-
     if(!$error) {
-        $result = $db->getLogin($email);
+        $result = $db_panel->getLogin($email);
         if($result != null) {
             $_SESSION['error'] = 'Diese E-Mail-Adresse ist bereits vergeben';
             $error = true;
@@ -33,11 +30,11 @@ if(isset($_POST['submit'])) {
 
     if(!$error) {
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
-        $result = $db->setLogin($email, $username, $password_hash);
+        $result = $db_panel->setLogin($email, $username, $password_hash);
 
         if($result) {
             echo 'Du wurdest erfolgreich registriert<br>';
-            header('location: login.php');
+            header('location: index.php?site=login');
         } else {
             $_SESSION['error'] = 'Beim Abspeichern ist leider ein Fehler aufgetreten';
             $error = true;
