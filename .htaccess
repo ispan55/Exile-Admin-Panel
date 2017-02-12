@@ -1,8 +1,6 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteBase /
-RewriteRule ^index\.php$ - [L,R=301]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php [L,R=301]
+RewriteRule ^(.*)$ index.php?site=$1&%{QUERY_STRING} [NC,L]
 </IfModule>
