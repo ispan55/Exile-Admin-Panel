@@ -2,7 +2,7 @@
 
 use voku\db\DB;
 
-require_once($_SERVER['DOCUMENT_ROOT'] . "/vendor/autoload.php");
+require_once(ROOT_PATH . "/vendor/autoload.php");
 
 class DatabasePanel
 {
@@ -17,14 +17,12 @@ class DatabasePanel
     public function getLogin($email)
     {
         $query = $this->conn->query("SELECT * FROM accounts WHERE email='$email'");
-        $query->setDefaultResultType("array");
         return array_shift($query->fetchAll());
     }
 
     public function getLoginByID($id)
     {
         $query = $this->conn->query("SELECT * FROM accounts WHERE id='$id'");
-        $query->setDefaultResultType("array");
         return array_shift($query->fetchAll());
     }
 
@@ -51,11 +49,10 @@ class DatabasePanel
         return $this->conn->update('accounts', $array, $where);
     }
 
-    public function updateProfileImage($path, $id)
+    public function updateProfileImage($file, $id)
     {
         $array = [
-            'path' => $path,
-            'updated_at' => 'CURRENT_TIMESTAMP()'
+            'picture' => $file
         ];
         $where = [
             'id' => $id
@@ -76,7 +73,6 @@ class DatabasePanel
     public function getToken($identifier)
     {
         $query = $this->conn->query("SELECT * FROM securitytokens WHERE identifier = '$identifier'");
-        $query->setDefaultResultType("array");
         return array_shift($query->fetchAll());
     }
 
@@ -89,5 +85,30 @@ class DatabasePanel
             'identifier' => $identifier
         ];
         return $this->conn->update('securitytokens', $array, $where);
+    }
+
+    public function setBan($guid, $message, $bid, $name, $banned_by) {
+        $insert = [
+            'perm' => true,
+            'guid' => $guid,
+            'ban_id' => $bid,
+            'reason' => $message,
+            'name' => $name,
+            'banned_by' => $banned_by
+        ];
+        return $this->conn->insert('bans', $insert);
+    }
+
+    public function setTBan($guid, $message, $bid, $name, $ban_time, $banned_by) {
+        $insert = [
+            'perm' => false,
+            'guid' => $guid,
+            'ban_id' => $bid,
+            'reason' => $message,
+            'name' => $name,
+            'ban_time' => $ban_time,
+            'banned_by' => $banned_by
+        ];
+        return $this->conn->insert('bans', $insert);
     }
 }
