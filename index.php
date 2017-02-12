@@ -19,15 +19,15 @@ if (version_compare(PHP_VERSION, '5.5.0', '<')) {
 }
 
 require_once('vendor/autoload.php');
-use \PageCache\PageCache;
-$cache = new PageCache();
-$cache->setPath('cache/');
-$cache->init();
-
 
 session_start();
 require_once('config.php');
 require_once('include/class/functions.php');
+
+/*use \PageCache\PageCache;
+$cache = new PageCache();
+$cache->setPath(ROOT_PATH . 'cache/');
+$cache->init();*/
 
 $site = null;
 
@@ -35,53 +35,27 @@ if (isset($_GET['site'])) {
     $site = $_GET['site'];
 }
 
-$title = '';
+$sites = array('territories', 'vehicles', 'profile', 'search', 'player', 'register', 'login', 'banlist');
+$path = 'sites/';
+$php = '.php';
+
 if (is_checked_in() == true) {
-    if (empty($site)) {
-        require_once('include/header.php');
-        require_once('sites/dashboard.php');
-        require_once('include/footer.php');
-        die();
-    } elseif ($site == 'territories') {
-        $title = ucfirst($site);
-        require_once('include/header.php');
-        require_once('sites/territories.php');
-        require_once('include/footer.php');
-        die();
-    } elseif ($site == 'vehicles') {
-        $title = ucfirst($site);
-        require_once('include/header.php');
-        require_once('sites/vehicles.php');
-        require_once('include/footer.php');
-        die();
-    } elseif ($site == 'profile') {
-        $title = ucfirst($site);
-        require_once('include/header.php');
-        require_once('sites/profile.php');
-        require_once('include/footer.php');
-        die();
-    } elseif ($site == 'search') {
-        $title = ucfirst($site);
-        require_once('include/header.php');
-        require_once('sites/searchresult.php');
-        require_once('include/footer.php');
-        die();
-    } elseif ($site == 'player') {
-        $title = ucfirst($site);
-        require_once('include/header.php');
-        require_once('include/class/player.php');
-        require_once('include/footer.php');
-        die();
+    if (!empty($site)) {
+        if (in_array($site, $sites)) {
+            require_once($path . $site . $php);
+        } else {
+            require_once('pages/examples/404.html');
+        }
     } else {
-        require_once('pages/examples/404.html');
-        die();
+        require_once($path . 'dashboard' . $php);
     }
 } else {
     if (check_user($db_panel) == null) {
-        if (!isset($site)) {
+        if ($site == 'register') {
+            $title = ucfirst($site);
+            require_once('sites/register.php');
+        } elseif (!isset($site) || $site == 'login') {
             require_once('sites/login.php');
-        } else {
-            require_once('pages/examples/404.html');
         }
     }
 }
