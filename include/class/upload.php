@@ -561,7 +561,6 @@ class Upload {
     /**
      * Create path to destination
      *
-     * @param string $dir
      * @return bool
      */
     protected function create_destination() {
